@@ -73,13 +73,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OpenLobby();
 
-	/** Called via input to join open "Lobby" level based on the given IP Address. 
+	/** 
+	 *	Called via input to join open "Lobby" level based on the given IP Address. 
 	 *	@param Address An IP Address.
 	 */
 	UFUNCTION(BlueprintCallable)
 	void CallOpenLevel(const FString& Address);
 
-	/** Called via input to travel client on open "Lobby" level based on the given IP Address. 
+	/** 
+	 *	Called via input to travel client on open "Lobby" level based on the given IP Address. 
 	 *	@param Adress An IP Address.
 	 */
 	UFUNCTION(BlueprintCallable)
