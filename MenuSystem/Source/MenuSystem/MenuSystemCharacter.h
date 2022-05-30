@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/OnlineSessionInterface.h"
+
 #include "MenuSystemCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -63,8 +65,41 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 public:
+	// Pointer to the online session interface.
+	IOnlineSessionPtr OnlineSessionInterface;
 
-	// Pointer to the online session interface
-	TSharedPtr<class IOnlineSession, ESPMode::ThreadSafe> OnlineSessionInterface;
+protected:
+
+	/** Called via input to create an online game session. */
+	UFUNCTION(BlueprintCallable)
+	void CreateGameSession();
+
+	/** Called via input to join an online game session. */
+	UFUNCTION(BlueprintCallable)
+	void JoinGameSession();
+
+	/** 
+	 * Called on create session complete. 
+	 * @param SessionName	Name of the online game session.
+	 * @param bWasSuccessful	Did the online game session creation was successful.
+	 */
+	void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
+
+	/**
+	 * Called on find sessions complete.
+	 * @param bWasSuccessful	Did the online game sessions finding was successful.
+	 */
+	void OnFindSessionsComplete(bool bWasSuccessful);
+
+private:
+	
+	/** Event fired on create session complete event. */
+	FOnCreateSessionCompleteDelegate CreateSessionCompleteDelegate;
+
+	/** Event fired on find sessions complete event. */
+	FOnFindSessionsCompleteDelegate FindSessionsCompleteDelegate;
+
+	// Pointer to the online session search object.
+	TSharedPtr<FOnlineSessionSearch> SessionSearch;
 };
 
