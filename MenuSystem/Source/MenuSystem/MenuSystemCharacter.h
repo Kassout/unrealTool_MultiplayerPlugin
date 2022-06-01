@@ -91,6 +91,13 @@ protected:
 	 */
 	void OnFindSessionsComplete(bool bWasSuccessful);
 
+	/**
+	 * Called on join session complete.
+	 * @param SessionName	Name of the online game session.
+	 * @param Result	Result type of the join session event.
+	 */
+	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
+
 private:
 	
 	/** Event fired on create session complete event. */
@@ -98,6 +105,9 @@ private:
 
 	/** Event fired on find sessions complete event. */
 	FOnFindSessionsCompleteDelegate FindSessionsCompleteDelegate;
+
+	/** Event fired on join session complete event. */
+	FOnJoinSessionCompleteDelegate JoinSessionCompleteDelegate;
 
 	// Pointer to the online session search object.
 	TSharedPtr<FOnlineSessionSearch> SessionSearch;
