@@ -20,6 +20,7 @@ class AMenuSystemCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
 public:
 	AMenuSystemCharacter();
 
@@ -69,7 +70,6 @@ public:
 	IOnlineSessionPtr OnlineSessionInterface;
 
 protected:
-
 	/** Called via input to create an online game session. */
 	UFUNCTION(BlueprintCallable)
 	void CreateGameSession();
@@ -99,7 +99,6 @@ protected:
 	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 
 private:
-	
 	/** Event fired on create session complete event. */
 	FOnCreateSessionCompleteDelegate CreateSessionCompleteDelegate;
 
